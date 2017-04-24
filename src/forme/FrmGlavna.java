@@ -6,7 +6,8 @@
 package forme;
 
 import forme.kartonpacijenta.FrmKartonPacijenta;
-import javax.swing.JDialog;
+import forme.usluga.FrmUsluga;
+import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 /**
@@ -31,46 +32,78 @@ public class FrmGlavna extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jmiNoviKarton = new javax.swing.JMenuItem();
-        jmiPrikazKartona = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jmiOAutoru = new javax.swing.JMenuItem();
+        jMenuKartoniPacijenata = new javax.swing.JMenu();
+        JMenuItemNoviKarton = new javax.swing.JMenuItem();
+        JMenuItemPrikazKartona = new javax.swing.JMenuItem();
+        jMenuUsluge = new javax.swing.JMenu();
+        jMenuItemPokreni = new javax.swing.JMenuItem();
+        jMenuOAplikaciji = new javax.swing.JMenu();
+        JMenuItemOAutoru = new javax.swing.JMenuItem();
+
+        jMenu3.setText("File");
+        jMenuBar2.add(jMenu3);
+
+        jMenu4.setText("Edit");
+        jMenuBar2.add(jMenu4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("KartoniPacijenata");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuKartoniPacijenata.setText("KartoniPacijenata");
+        jMenuKartoniPacijenata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
+                jMenuKartoniPacijenataActionPerformed(evt);
             }
         });
 
-        jmiNoviKarton.setText(" Novi karton");
-        jmiNoviKarton.addActionListener(new java.awt.event.ActionListener() {
+        JMenuItemNoviKarton.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, 0));
+        JMenuItemNoviKarton.setText(" Novi karton");
+        JMenuItemNoviKarton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiNoviKartonActionPerformed(evt);
+                JMenuItemNoviKartonActionPerformed(evt);
             }
         });
-        jMenu1.add(jmiNoviKarton);
+        jMenuKartoniPacijenata.add(JMenuItemNoviKarton);
 
-        jmiPrikazKartona.setText("Prikaz svih kartona");
-        jMenu1.add(jmiPrikazKartona);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("O aplikaciji");
-
-        jmiOAutoru.setText("O autoru");
-        jmiOAutoru.addActionListener(new java.awt.event.ActionListener() {
+        JMenuItemPrikazKartona.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, 0));
+        JMenuItemPrikazKartona.setText("Prikaz svih kartona");
+        JMenuItemPrikazKartona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiOAutoruActionPerformed(evt);
+                JMenuItemPrikazKartonaActionPerformed(evt);
             }
         });
-        jMenu2.add(jmiOAutoru);
+        jMenuKartoniPacijenata.add(JMenuItemPrikazKartona);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMenuKartoniPacijenata);
+
+        jMenuUsluge.setText("Usluge");
+
+        jMenuItemPokreni.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, 0));
+        jMenuItemPokreni.setText("Pokreni");
+        jMenuItemPokreni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPokreniActionPerformed(evt);
+            }
+        });
+        jMenuUsluge.add(jMenuItemPokreni);
+
+        jMenuBar1.add(jMenuUsluge);
+
+        jMenuOAplikaciji.setText("O aplikaciji");
+
+        JMenuItemOAutoru.setText("O autoru");
+        JMenuItemOAutoru.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItemOAutoruActionPerformed(evt);
+            }
+        });
+        jMenuOAplikaciji.add(JMenuItemOAutoru);
+
+        jMenuBar1.add(jMenuOAplikaciji);
 
         setJMenuBar(jMenuBar1);
 
@@ -88,17 +121,32 @@ public class FrmGlavna extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmiOAutoruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiOAutoruActionPerformed
+    private void JMenuItemOAutoruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemOAutoruActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jmiOAutoruActionPerformed
+    }//GEN-LAST:event_JMenuItemOAutoruActionPerformed
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-     
-    }//GEN-LAST:event_jMenu1ActionPerformed
+    private void jMenuKartoniPacijenataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuKartoniPacijenataActionPerformed
 
-    private void jmiNoviKartonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNoviKartonActionPerformed
-   JDialog jfkartonpacijenta=new FrmKartonPacijenta(this, true);
-        jfkartonpacijenta.setVisible(true);    }//GEN-LAST:event_jmiNoviKartonActionPerformed
+    }//GEN-LAST:event_jMenuKartoniPacijenataActionPerformed
+
+    private void JMenuItemNoviKartonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemNoviKartonActionPerformed
+        FrmKartonPacijenta jfkartonpacijenta = new FrmKartonPacijenta(this, true);
+        jfkartonpacijenta.getJtabpanelistakartona().setSelectedIndex(0);
+        jfkartonpacijenta.setVisible(true);    }//GEN-LAST:event_JMenuItemNoviKartonActionPerformed
+
+    private void JMenuItemPrikazKartonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemPrikazKartonaActionPerformed
+        FrmKartonPacijenta jdialoglistakartona = new FrmKartonPacijenta(this, true);
+        jdialoglistakartona.getJtabpanelistakartona().setSelectedIndex(1);
+        jdialoglistakartona.setLayout(new BorderLayout());
+        //  jdialoglistakartona.add(new FrmPrikazKartonaPacijenataTabela(),BorderLayout.CENTER);
+        pack();
+        jdialoglistakartona.setVisible(true);
+    }//GEN-LAST:event_JMenuItemPrikazKartonaActionPerformed
+
+    private void jMenuItemPokreniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPokreniActionPerformed
+        JFrame frmu = new FrmUsluga();
+        frmu.setVisible(true);
+    }//GEN-LAST:event_jMenuItemPokreniActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,11 +184,17 @@ public class FrmGlavna extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem JMenuItemNoviKarton;
+    private javax.swing.JMenuItem JMenuItemOAutoru;
+    private javax.swing.JMenuItem JMenuItemPrikazKartona;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jmiNoviKarton;
-    private javax.swing.JMenuItem jmiOAutoru;
-    private javax.swing.JMenuItem jmiPrikazKartona;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItemPokreni;
+    private javax.swing.JMenu jMenuKartoniPacijenata;
+    private javax.swing.JMenu jMenuOAplikaciji;
+    private javax.swing.JMenu jMenuUsluge;
+    private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
 }

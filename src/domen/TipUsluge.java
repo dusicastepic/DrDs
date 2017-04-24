@@ -10,8 +10,9 @@ package domen;
  * @author User
  */
 public class TipUsluge {
-  Integer sifraTipaUsluge;
-  String nazivTipaUsluge;
+
+    private Integer sifraTipaUsluge;
+    private String nazivTipaUsluge;
 
     public TipUsluge(Integer sifraTipaUsluge, String nazivTipaUsluge) {
         this.sifraTipaUsluge = sifraTipaUsluge;
@@ -33,5 +34,10 @@ public class TipUsluge {
     public void setNazivTipaUsluge(String nazivTipaUsluge) {
         this.nazivTipaUsluge = nazivTipaUsluge;
     }
-  
+
+    @Override
+    public String toString() {
+        return nazivTipaUsluge;
+    }
+
 }

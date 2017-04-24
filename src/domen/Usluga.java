@@ -10,17 +10,30 @@ package domen;
  * @author User
  */
 public class Usluga {
-    
-    Integer sifraUsluge;
-    String  nazivUsluge;
-    String  opisUsluge;
-    Double  cenaUsluge;
 
-    public Usluga(Integer sifraUsluge, String nazivUsluge, String opisUsluge, Double cenaUsluge) {
+    private Integer sifraUsluge;
+    private String nazivUsluge;
+    private String opisUsluge;
+    private Double cenaUsluge;
+    private TipUsluge tu;
+
+    public Usluga() {
+    }
+
+    public Usluga(Integer sifraUsluge, String nazivUsluge, String opisUsluge, Double cenaUsluge, TipUsluge tu) {
         this.sifraUsluge = sifraUsluge;
         this.nazivUsluge = nazivUsluge;
         this.opisUsluge = opisUsluge;
         this.cenaUsluge = cenaUsluge;
+        this.tu = tu;
+    }
+
+    public TipUsluge getTu() {
+        return tu;
+    }
+
+    public void setTu(TipUsluge tu) {
+        this.tu = tu;
     }
 
     public Integer getSifraUsluge() {
@@ -54,5 +67,7 @@ public class Usluga {
     public void setCenaUsluge(Double cenaUsluge) {
         this.cenaUsluge = cenaUsluge;
     }
+
     
+
 }

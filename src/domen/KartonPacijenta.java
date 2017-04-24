@@ -1,6 +1,5 @@
 package domen;
 
-
 import java.util.Date;
 
 /*
@@ -8,24 +7,26 @@ import java.util.Date;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author User
  */
 public class KartonPacijenta {
-    
-    String jmbg;
-    String lbo;
-    String ime;
-    String prezime;
-    String pol;
-    String datumRođenja;
-    String adresa;
-    String kontaktTelefon;
-    String krvnaGrupa;
 
-    public KartonPacijenta(String jmbg, String lbo, String ime, String prezime, String pol, String datumRođenja, String adresa, String kontaktTelefon, String krvnaGrupa) {
+    private String jmbg;
+    private int lbo;
+    private String ime;
+    private String prezime;
+    private String pol;
+    private Date datumRođenja;
+    private String adresa;
+    private String kontaktTelefon;
+    private String krvnaGrupa;
+
+    public KartonPacijenta() {
+    }
+
+    public KartonPacijenta(String jmbg, int lbo, String ime, String prezime, String pol, Date datumRođenja, String adresa, String kontaktTelefon, String krvnaGrupa) {
         this.jmbg = jmbg;
         this.lbo = lbo;
         this.ime = ime;
@@ -45,11 +46,11 @@ public class KartonPacijenta {
         this.jmbg = jmbg;
     }
 
-    public String getLbo() {
+    public int getLbo() {
         return lbo;
     }
 
-    public void setLbo(String lbo) {
+    public void setLbo(int lbo) {
         this.lbo = lbo;
     }
 
@@ -77,11 +78,11 @@ public class KartonPacijenta {
         this.pol = pol;
     }
 
-    public String getDatumRođenja() {
+    public Date getDatumRođenja() {
         return datumRođenja;
     }
 
-    public void setDatumRođenja(String datumRođenja) {
+    public void setDatumRođenja(Date datumRođenja) {
         this.datumRođenja = datumRođenja;
     }
 
@@ -108,10 +109,6 @@ public class KartonPacijenta {
     public void setKrvnaGrupa(String krvnaGrupa) {
         this.krvnaGrupa = krvnaGrupa;
     }
-    
-    
-            
-   
-            
-    
+
+     
 }

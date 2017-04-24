@@ -6,19 +6,15 @@
 package forme.kartonpacijenta;
 
 import domen.KartonPacijenta;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Formatter;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JOptionPane;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+import javax.swing.JTabbedPane;
+import poslovnalogika.Kontroler;
 
 /**
  *
@@ -29,9 +25,14 @@ public class FrmKartonPacijenta extends javax.swing.JDialog {
     /**
      * Creates new form FrmKartonPacijenta
      */
+    // private JTabbedPane jtabpanelistakartona;
     public FrmKartonPacijenta(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public JTabbedPane getJtabpanelistakartona() {
+        return jtabpanelistakartona;
     }
 
     /**
@@ -49,7 +50,9 @@ public class FrmKartonPacijenta extends javax.swing.JDialog {
         jDatePickerUtil3 = new org.jdatepicker.util.JDatePickerUtil();
         jDatePickerUtil4 = new org.jdatepicker.util.JDatePickerUtil();
         jDatePickerUtil5 = new org.jdatepicker.util.JDatePickerUtil();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        utilDateModel1 = new org.jdatepicker.impl.UtilDateModel();
+        jtabpanelistakartona = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jlbjmbg = new javax.swing.JLabel();
         jtfjmbg = new javax.swing.JTextField();
@@ -71,6 +74,18 @@ public class FrmKartonPacijenta extends javax.swing.JDialog {
         jtfdatrodj = new javax.swing.JTextField();
         jcomboboxkrvnagrupa = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
+        frmPrikazKartonaPacijenataTabela2 = new forme.kartonpacijenta.FrmPrikazKartonaPacijenataTabela();
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 458, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 406, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -194,7 +209,7 @@ public class FrmKartonPacijenta extends javax.swing.JDialog {
                             .addComponent(jlbadresa))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jtfdatrodj, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(513, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,35 +252,40 @@ public class FrmKartonPacijenta extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jlbkrvnagrupa)
                         .addComponent(jcomboboxkrvnagrupa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtnsacuvaj)
                 .addGap(20, 20, 20))
         );
 
-        jTabbedPane1.addTab("Osnovni podaci", jPanel1);
+        jtabpanelistakartona.addTab("Osnovni podaci", jPanel1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(frmPrikazKartonaPacijenataTabela2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 435, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(frmPrikazKartonaPacijenataTabela2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab2", jPanel2);
+        jtabpanelistakartona.addTab("Lista Kartona", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jtabpanelistakartona)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jtabpanelistakartona)
         );
 
         pack();
@@ -300,28 +320,40 @@ public class FrmKartonPacijenta extends javax.swing.JDialog {
     }//GEN-LAST:event_jcomboboxpolActionPerformed
 
     private void jbtnsacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnsacuvajActionPerformed
-        String jmbg=jtfjmbg.getText().trim();
-        String lbo= jtflbo.getText().trim();
-        String ime=jtfime.getText().trim();
-        String prezime=jtfprezime.getText().trim();
-        String pol=(String)jcomboboxpol.getSelectedItem();
-        String input=jtfdatrodj.getText().trim();
-        String datumRođenja=jtfdatrodj.getText().trim();
-        String adresa =jtfadresa.getText().trim();
-        String kontaktTelefon=jtfkontakttelefon.getText().trim();
-        String krvnaGrupa=(String)jcomboboxkrvnagrupa.getSelectedItem();
-        KartonPacijenta karton;
+//        try {
+            String jmbg = jtfjmbg.getText().trim();
+            String licnibrojosiguranika = (jtflbo.getText().trim());
+            String ime = jtfime.getText().trim();
+            String prezime = jtfprezime.getText().trim();
+            String pol = (String) jcomboboxpol.getSelectedItem();
+            String datumRođ = jtfdatrodj.getText().trim();
+            String adresa = jtfadresa.getText().trim();
+            String kontaktTelefon = jtfkontakttelefon.getText().trim();
+            String krvnaGrupa = (String) jcomboboxkrvnagrupa.getSelectedItem();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+            Date datumRođenja = null;
+            int lbo=Integer.parseInt(licnibrojosiguranika);
+             
         try {
-            karton = kreirajIIzvrsiValidaciju(jmbg, lbo,  ime, prezime,  pol,  datumRođenja, adresa,  kontaktTelefon,  krvnaGrupa);
-         //  Repozitorijum.sacuvajPoslovnogPartnera(partner);
-            JOptionPane.showMessageDialog(this, "Karton pacijenta uspešno sačuvan");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            datumRođenja = sdf.parse(datumRođ);
+        } catch (ParseException ex) {
+            Logger.getLogger(FrmKartonPacijenta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-          ;
-    ;
-    
+                
+               
+//uradi validaciju
+            // karton = kreirajIIzvrsiValidaciju(jmbg, lbo, ime, prezime, pol, datumRođenja, adresa, kontaktTelefon, krvnaGrupa);
+            //  Repozitorijum.sacuvajPoslovnogPartnera(partner);
+            KartonPacijenta karton = new KartonPacijenta(jmbg, lbo, ime, prezime, pol, datumRođenja, adresa, kontaktTelefon, krvnaGrupa);
+           // Kontroler.getInstance().sacuvajKartonPacijenta(karton);
+//            JOptionPane.showMessageDialog(this, "Karton pacijenta uspešno sačuvan");
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(this, "Karton pacijenta nije sačuvan. " + ex.getMessage());
+//        }
+        ;
+        ;
+
     }//GEN-LAST:event_jbtnsacuvajActionPerformed
 
     private void jtfdatrodjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfdatrodjActionPerformed
@@ -371,6 +403,7 @@ public class FrmKartonPacijenta extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private forme.kartonpacijenta.FrmPrikazKartonaPacijenataTabela frmPrikazKartonaPacijenataTabela2;
     private org.jdatepicker.JDateComponentFactory jDateComponentFactory1;
     private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil1;
     private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil2;
@@ -379,7 +412,7 @@ public class FrmKartonPacijenta extends javax.swing.JDialog {
     private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JToggleButton jbtnsacuvaj;
     private javax.swing.JComboBox<String> jcomboboxkrvnagrupa;
     private javax.swing.JComboBox<String> jcomboboxpol;
@@ -392,6 +425,7 @@ public class FrmKartonPacijenta extends javax.swing.JDialog {
     private javax.swing.JLabel jlblbo;
     private javax.swing.JLabel jlbpol;
     private javax.swing.JLabel jlbprezime;
+    private javax.swing.JTabbedPane jtabpanelistakartona;
     private javax.swing.JTextField jtfadresa;
     private javax.swing.JTextField jtfdatrodj;
     private javax.swing.JTextField jtfime;
@@ -399,19 +433,24 @@ public class FrmKartonPacijenta extends javax.swing.JDialog {
     private javax.swing.JTextField jtfkontakttelefon;
     private javax.swing.JTextField jtflbo;
     private javax.swing.JTextField jtfprezime;
+    private org.jdatepicker.impl.UtilDateModel utilDateModel1;
     // End of variables declaration//GEN-END:variables
 
-    private KartonPacijenta kreirajIIzvrsiValidaciju(  String jmbg,String lbo, String ime, String prezime, String pol, String datumRođenja,String adresa, String kontaktTelefon, String krvnaGrupa) throws Exception {
+    private KartonPacijenta kreirajIIzvrsiValidaciju(String jmbg, int lbo, String ime, String prezime, String pol, Date datumRođenja, String adresa, String kontaktTelefon, String krvnaGrupa) throws Exception {
         if (jmbg == null || jmbg.isEmpty()) {
             throw new Exception("Morate uneti jmbg");
         }
         if (ime == null || ime.isEmpty()) {
             throw new Exception("Morate uneti ime");
         }
-         if (prezime == null || prezime.isEmpty()) {
+        if (prezime == null || prezime.isEmpty()) {
             throw new Exception("Morate uneti prezime");
         }
-        return new KartonPacijenta(jmbg, lbo,  ime, prezime,  pol,  datumRođenja, adresa,  kontaktTelefon,  krvnaGrupa);
-    
+        return new KartonPacijenta(jmbg, lbo, ime, prezime, pol, datumRođenja, adresa, kontaktTelefon, krvnaGrupa);
+
+    }
+
+    public void setJtabpanelistakartona(JTabbedPane jtabpanelistakartona) {
+        this.jtabpanelistakartona = jtabpanelistakartona;
     }
 }

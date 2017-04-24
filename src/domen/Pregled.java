@@ -13,23 +13,26 @@ import java.util.Date;
  * @author User
  */
 public class Pregled {
-    
-    Integer brojPregleda;
-    Date datumPregleda;
-    Date vremePregleda;
-    Integer sistolniKrvniPritisak;
-    Integer dijastolniKrvniPritisak;
-    Integer puls;
-    String anamneza;
+//dodaj da cuvas trajanje pregleda hm?? tacno vreme dolaska posete i odlaska
+    private Integer brojPregleda;
+    private Date datumPregleda;
+    private Date vremePregleda;
+    private String krvniPritisak;
+    private Integer puls;
+    private String anamneza;
+    private KartonPacijenta kartonPacijenta;
 
-    public Pregled(Integer brojPregleda, Date datumPregleda, Date vremePregleda, Integer sistolniKrvniPritisak, Integer dijastolniKrvniPritisak, Integer puls, String anamneza) {
+    public Pregled() {
+    }
+
+    public Pregled(Integer brojPregleda, Date datumPregleda, Date vremePregleda, String krvniPritisak, Integer puls, String anamneza, KartonPacijenta kartonPacijenta) {
         this.brojPregleda = brojPregleda;
         this.datumPregleda = datumPregleda;
         this.vremePregleda = vremePregleda;
-        this.sistolniKrvniPritisak = sistolniKrvniPritisak;
-        this.dijastolniKrvniPritisak = dijastolniKrvniPritisak;
+        this.krvniPritisak = krvniPritisak;
         this.puls = puls;
         this.anamneza = anamneza;
+        this.kartonPacijenta = kartonPacijenta;
     }
 
     public Integer getBrojPregleda() {
@@ -56,20 +59,12 @@ public class Pregled {
         this.vremePregleda = vremePregleda;
     }
 
-    public Integer getSistolniKrvniPritisak() {
-        return sistolniKrvniPritisak;
+    public String getKrvniPritisak() {
+        return krvniPritisak;
     }
 
-    public void setSistolniKrvniPritisak(Integer sistolniKrvniPritisak) {
-        this.sistolniKrvniPritisak = sistolniKrvniPritisak;
-    }
-
-    public Integer getDijastolniKrvniPritisak() {
-        return dijastolniKrvniPritisak;
-    }
-
-    public void setDijastolniKrvniPritisak(Integer dijastolniKrvniPritisak) {
-        this.dijastolniKrvniPritisak = dijastolniKrvniPritisak;
+    public void setKrvniPritisak(String krvniPritisak) {
+        this.krvniPritisak = krvniPritisak;
     }
 
     public Integer getPuls() {
@@ -87,10 +82,15 @@ public class Pregled {
     public void setAnamneza(String anamneza) {
         this.anamneza = anamneza;
     }
-    
-    
- 
-    
-  
-    
+
+    public KartonPacijenta getKartonPacijenta() {
+        return kartonPacijenta;
+    }
+
+    public void setKartonPacijenta(KartonPacijenta kartonPacijenta) {
+        this.kartonPacijenta = kartonPacijenta;
+    }
+
+     
+
 }
