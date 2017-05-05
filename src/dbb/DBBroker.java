@@ -8,6 +8,7 @@ package dbb;
 import domen.KartonPacijenta;
 import domen.TipUsluge;
 import domen.Usluga;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -18,6 +19,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import util.DBUtil;
 
 /**
  *
@@ -35,10 +37,11 @@ public class DBBroker {
         }
     }
 
-    public void otvoriKonekciju() {
-        String url = "jdbc:mysql://localhost:3306/drstepic";
-        String user = "root";
-        String pass = "";
+    public void otvoriKonekciju() throws IOException {
+        DBUtil dbutil=new DBUtil();
+        String url = dbutil.vratiUrl();
+        String user = dbutil.vratiKorisnika();
+        String pass = dbutil.vratiSifru();
         try {
             konekcija = DriverManager.getConnection(url, user, pass);
             konekcija.setAutoCommit(false);

@@ -36,12 +36,18 @@ public class FrmGlavna extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableKonfiguracija = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuKartoniPacijenata = new javax.swing.JMenu();
         JMenuItemNoviKarton = new javax.swing.JMenuItem();
         JMenuItemPrikazKartona = new javax.swing.JMenuItem();
         jMenuUsluge = new javax.swing.JMenu();
         jMenuItemPokreni = new javax.swing.JMenuItem();
+        jMenuKonfiguracija = new javax.swing.JMenu();
+        jMenuItemBaza = new javax.swing.JMenuItem();
         jMenuOAplikaciji = new javax.swing.JMenu();
         JMenuItemOAutoru = new javax.swing.JMenuItem();
 
@@ -52,6 +58,49 @@ public class FrmGlavna extends javax.swing.JFrame {
         jMenuBar2.add(jMenu4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTableKonfiguracija.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableKonfiguracija);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(308, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(190, Short.MAX_VALUE))
+        );
+
+        jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         jMenuKartoniPacijenata.setText("KartoniPacijenata");
         jMenuKartoniPacijenata.addActionListener(new java.awt.event.ActionListener() {
@@ -93,6 +142,18 @@ public class FrmGlavna extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuUsluge);
 
+        jMenuKonfiguracija.setText("Konfiguracija");
+
+        jMenuItemBaza.setText("Baza");
+        jMenuItemBaza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemBazaActionPerformed(evt);
+            }
+        });
+        jMenuKonfiguracija.add(jMenuItemBaza);
+
+        jMenuBar1.add(jMenuKonfiguracija);
+
         jMenuOAplikaciji.setText("O aplikaciji");
 
         JMenuItemOAutoru.setText("O autoru");
@@ -111,11 +172,11 @@ public class FrmGlavna extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addComponent(jLayeredPane1)
         );
 
         pack();
@@ -147,6 +208,10 @@ public class FrmGlavna extends javax.swing.JFrame {
         JFrame frmu = new FrmUsluga();
         frmu.setVisible(true);
     }//GEN-LAST:event_jMenuItemPokreniActionPerformed
+
+    private void jMenuItemBazaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBazaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemBazaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,14 +252,20 @@ public class FrmGlavna extends javax.swing.JFrame {
     private javax.swing.JMenuItem JMenuItemNoviKarton;
     private javax.swing.JMenuItem JMenuItemOAutoru;
     private javax.swing.JMenuItem JMenuItemPrikazKartona;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItemBaza;
     private javax.swing.JMenuItem jMenuItemPokreni;
     private javax.swing.JMenu jMenuKartoniPacijenata;
+    private javax.swing.JMenu jMenuKonfiguracija;
     private javax.swing.JMenu jMenuOAplikaciji;
     private javax.swing.JMenu jMenuUsluge;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableKonfiguracija;
     // End of variables declaration//GEN-END:variables
 }

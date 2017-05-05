@@ -5,18 +5,15 @@
  */
 package forme.usluga;
 
-import com.sun.istack.internal.NotNull;
 import domen.TipUsluge;
 import domen.Usluga;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import model.ModelTabeleUsluga;
 import poslovnalogika.Kontroler;
-import validacija.ValidacijaUsluga;
 
 /**
  *
@@ -35,6 +32,7 @@ public class FrmUsluga extends javax.swing.JFrame {
         ucitajListuTipovaUsluga();
         srediDugmad();
         srediTabeluUsluga();
+        srediLabeleZaValidaciju();
     }
 
     /**
@@ -107,6 +105,16 @@ public class FrmUsluga extends javax.swing.JFrame {
                 jTextFieldNazivUslugeCaretUpdate(evt);
             }
         });
+        jTextFieldNazivUsluge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNazivUslugeActionPerformed(evt);
+            }
+        });
+        jTextFieldNazivUsluge.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldNazivUslugeKeyTyped(evt);
+            }
+        });
         jPanelNovaUsluga.add(jTextFieldNazivUsluge, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 380, 30));
 
         jTextFieldCenaUsluge.addCaretListener(new javax.swing.event.CaretListener() {
@@ -117,6 +125,14 @@ public class FrmUsluga extends javax.swing.JFrame {
         jTextFieldCenaUsluge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldCenaUslugeActionPerformed(evt);
+            }
+        });
+        jTextFieldCenaUsluge.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldCenaUslugeKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldCenaUslugeKeyTyped(evt);
             }
         });
         jPanelNovaUsluga.add(jTextFieldCenaUsluge, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 380, 30));
@@ -285,8 +301,9 @@ public class FrmUsluga extends javax.swing.JFrame {
         jButtonIzmeni.setVisible(false);
         jButtonSacuvaj.setVisible(true);
         jButtonSacuvajNakonIzmene.setVisible(false);
-        jLabelNazivUslugeValidacija.setIcon(pic);
-        jLabelCenaUslugeValidacija.setIcon(pic);
+       jLabelNazivUslugeValidacija.setIcon(pic);
+       jLabelCenaUslugeValidacija.setIcon(pic);
+srediLabeleZaValidaciju();
     }//GEN-LAST:event_jButtondodajActionPerformed
 
     private void jComboBoxTipUslugaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipUslugaActionPerformed
@@ -302,7 +319,7 @@ public class FrmUsluga extends javax.swing.JFrame {
         String nazivUsluge = jTextFieldNazivUsluge.getText();
         if (nazivUsluge.length() == 0) {
             JOptionPane.showMessageDialog(this, "Naziv usluge je obavezan!", "Greška", JOptionPane.ERROR_MESSAGE);
-            jTextFieldNazivUsluge.requestFocusInWindow();
+         //   jTextFieldNazivUsluge.requestFocusInWindow();
             return;
         }
 
@@ -314,12 +331,12 @@ public class FrmUsluga extends javax.swing.JFrame {
         }
         if (jTextFieldCenaUsluge.getText().length() == 0) {
             JOptionPane.showMessageDialog(this, "Cena usluge je obavezna!", "Greška", JOptionPane.ERROR_MESSAGE);
-            jTextFieldCenaUsluge.requestFocusInWindow();
+       //     jTextFieldCenaUsluge.requestFocusInWindow();
             return;
         }
         if (!proveriCifre()) {
             JOptionPane.showMessageDialog(this, "Cena usluge ne može imati slova!", "Greška", JOptionPane.ERROR_MESSAGE);
-            jTextFieldCenaUsluge.requestFocusInWindow();
+           // jTextFieldCenaUsluge.requestFocusInWindow();
             return;
         }
         Double cenaUsluge = Double.parseDouble(jTextFieldCenaUsluge.getText());
@@ -327,7 +344,7 @@ public class FrmUsluga extends javax.swing.JFrame {
 
         if (jComboBoxTipUsluga.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "Tip usluge je obavezan!", "Greška", JOptionPane.ERROR_MESSAGE);
-            jComboBoxTipUsluga.requestFocusInWindow();
+           jComboBoxTipUsluga.requestFocusInWindow();
             return;
         }
         Usluga u = new Usluga(sifraUsluge, nazivUsluge, opisUsluge, cenaUsluge, tu);
@@ -355,13 +372,24 @@ public class FrmUsluga extends javax.swing.JFrame {
 
         try {
             int red = jTableTabelaUsluga.getSelectedRow();
-            int odg = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da želite da obrišete?", "Obaveštenje", JOptionPane.YES_NO_OPTION);
+
+            //  JFrame dijalogZApotvrdu=new JFrame();
+            String[] opcije = {"Da", "Ne"};
+
+            int odg = JOptionPane.showOptionDialog(this, "Da li ste sigurni da želite da obrišete?", "Obaveštenje", 0, JOptionPane.INFORMATION_MESSAGE, null, opcije, null);
+
             if (odg == 0) {
+
                 ModelTabeleUsluga mtu = (ModelTabeleUsluga) jTableTabelaUsluga.getModel();
                 mtu.obrisi(red);
+
             }
-        } catch (Exception e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "Niste selektovali uslugu koju želite da obrišete!", "Greška", JOptionPane.ERROR_MESSAGE);
+            return;
+        } catch (Exception e2) {
+            JOptionPane.showMessageDialog(this, "Greška u upitu!", "Greška", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         obrisiSveIzForme();
 
@@ -378,8 +406,7 @@ public class FrmUsluga extends javax.swing.JFrame {
         jButtonSacuvaj.setVisible(false);
         jButtonSacuvajNakonIzmene.setVisible(true);
 
-        pic = new ImageIcon(getClass().getResource("/img/kensl.png"));
-
+//        pic = new ImageIcon(getClass().getResource("/img/kensl.png"));
         try {
             int red = jTableTabelaUsluga.getSelectedRow();
             ModelTabeleUsluga mtu = (ModelTabeleUsluga) jTableTabelaUsluga.getModel();
@@ -393,9 +420,9 @@ public class FrmUsluga extends javax.swing.JFrame {
         } catch (Exception e) {
             {
                 JOptionPane.showMessageDialog(this, "Niste selektovali uslugu koju želite da izmenite!");
+                return;
             }
         }
-
 
         jPanelTabelaUsluga.setVisible(false);
         jPanelNovaUsluga.setVisible(true);
@@ -444,11 +471,7 @@ public class FrmUsluga extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSacuvajNakonIzmeneActionPerformed
 
     private void jTextFieldNazivUslugeCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextFieldNazivUslugeCaretUpdate
-        pic = new ImageIcon(getClass().getResource("/img/ok.png"));
-
-        if (jTextFieldNazivUsluge.getText().length() >= 1) {
-            jLabelNazivUslugeValidacija.setIcon(pic);
-        }
+      jLabelNazivUslugeValidacija.setVisible(true);
     }//GEN-LAST:event_jTextFieldNazivUslugeCaretUpdate
 
     private void jTextFieldCenaUslugeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCenaUslugeActionPerformed
@@ -456,14 +479,69 @@ public class FrmUsluga extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldCenaUslugeActionPerformed
 
     private void jTextFieldCenaUslugeCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextFieldCenaUslugeCaretUpdate
-        pic = new ImageIcon(getClass().getResource("/img/ok.png"));
-
-        if (jTextFieldCenaUsluge.getText().length() >= 1 && proveriCifre()) {
-            jLabelCenaUslugeValidacija.setIcon(pic);
-        }
+        jLabelCenaUslugeValidacija.setVisible(true);
 
 
     }//GEN-LAST:event_jTextFieldCenaUslugeCaretUpdate
+
+    private void jTextFieldCenaUslugeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCenaUslugeKeyTyped
+        String c=evt.getKeyChar()+"";
+//        if (c=='.') {
+//            return;
+//        }
+//         if (!Character.isDigit(c)) {
+//            getToolkit().beep();
+//            evt.consume();
+//            
+//        }
+        String regex="[a-zA-Z]";
+        if (c.matches(regex)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        if (jTextFieldCenaUsluge.getText().isEmpty()) {
+            pic = new ImageIcon(getClass().getResource("/img/kensl.png"));
+            jLabelCenaUslugeValidacija.setIcon(pic);
+        }
+
+        if (!proveriCifre()) {
+            pic = new ImageIcon(getClass().getResource("/img/kensl.png"));
+            jLabelCenaUslugeValidacija.setIcon(pic);
+            
+        }
+        if (proveriCifre()) {
+            pic = new ImageIcon(getClass().getResource("/img/ok.png"));
+            jLabelCenaUslugeValidacija.setIcon(pic);
+        }
+    }//GEN-LAST:event_jTextFieldCenaUslugeKeyTyped
+
+    private void jTextFieldNazivUslugeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNazivUslugeKeyTyped
+        pic = new ImageIcon(getClass().getResource("/img/kensl.png"));
+        jLabelNazivUslugeValidacija.setIcon(pic);
+        if (jTextFieldNazivUsluge.getText().isEmpty()) {
+            pic = new ImageIcon(getClass().getResource("/img/kensl.png"));
+            jLabelNazivUslugeValidacija.setIcon(pic);
+        }
+        if (jTextFieldNazivUsluge.getText().length() >= 1) {
+            pic = new ImageIcon(getClass().getResource("/img/ok.png"));
+            jLabelNazivUslugeValidacija.setIcon(pic);
+        } else {
+            pic = new ImageIcon(getClass().getResource("/img/kensl.png"));
+            jLabelNazivUslugeValidacija.setIcon(pic);
+        }
+    }//GEN-LAST:event_jTextFieldNazivUslugeKeyTyped
+
+    private void jTextFieldCenaUslugeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCenaUslugeKeyPressed
+//        String regexNe="[a-zA-Z]";
+//        if (jTextFieldCenaUsluge.getText().matches(regexNe)) {
+//            pic = new ImageIcon(getClass().getResource("/img/kensl.png"));
+//            jLabCenaUslugeValidacija.setIcon(pic);
+//        }
+    }//GEN-LAST:event_jTextFieldCenaUslugeKeyPressed
+
+    private void jTextFieldNazivUslugeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNazivUslugeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNazivUslugeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -520,7 +598,6 @@ public class FrmUsluga extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelNovaUsluga;
     private javax.swing.JPanel jPanelTabelaUsluga;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableTabelaUsluga;
     private javax.swing.JTextArea jTextAreaOpisUsluge;
@@ -595,7 +672,8 @@ public class FrmUsluga extends javax.swing.JFrame {
     }
 
     private boolean proveriCifre() {
-//        int br=0;
+
+//  int br=0;
 //        for (int i = 0; i < jTextFieldCenaUsluge.getText().length(); i++) {
 //            if (!Character.isDigit(jTextFieldCenaUsluge.getText().charAt(i))) {
 //                br++;
@@ -604,12 +682,37 @@ public class FrmUsluga extends javax.swing.JFrame {
 //                return false;
 //            }
 //        }
+        String regex = "[1-9]+" + "(.)?" + "[0-9]*";
 
-        String regex = "[0-9]+" + "." + "[0-9]+";
-        if (!jTextFieldCenaUsluge.getText().matches(regex)) {
+        String tekstCene = jTextFieldCenaUsluge.getText() + "";
+        if (tekstCene.matches(regex)) {
+
+            for (int i = 0; i < tekstCene.length(); i++) {
+                if (tekstCene.charAt(i) == '.') {
+                    continue;
+                } else if (!Character.isDigit(jTextFieldCenaUsluge.getText().charAt(i))) {
+                    return false;
+                }
+
+            }
+            return true;
+        } else {
             return false;
         }
-        return true;
+    }
+
+    private void srediLabeleZaValidaciju() {
+        jLabelCenaUslugeValidacija.setVisible(false);
+        jLabelNazivUslugeValidacija.setVisible(false);
+    }
+
+    private boolean proveriNaziv() {
+        String regex="[A-Za-Z0-9]*";
+            if (!jTextFieldNazivUsluge.getText().matches(regex)) {
+            return false;
+        }
+            else return true;
+
     }
 
 }
