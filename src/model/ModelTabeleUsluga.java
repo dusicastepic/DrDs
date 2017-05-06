@@ -85,5 +85,5 @@ public class ModelTabeleUsluga extends AbstractTableModel {
     public ArrayList<Usluga> vratiListuUsluga() {
         return listaUsluga;
     }
-
+ 
 }

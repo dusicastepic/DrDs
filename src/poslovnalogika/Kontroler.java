@@ -92,4 +92,12 @@ public class Kontroler {
         dbb.zatvoriKonekciju();
     }
 
+    public ArrayList<Usluga> vratiListuUsluga(String filterText) {
+        dbb.ucitajDrajver();
+        dbb.otvoriKonekciju();
+        ArrayList<Usluga> listaUsluga = dbb.vratiListuUsluga(filterText);
+        dbb.zatvoriKonekciju();
+        return listaUsluga;
+    }
+
 }

@@ -37,15 +37,18 @@ public class DBBroker {
         }
     }
 
-    public void otvoriKonekciju() throws IOException {
-        DBUtil dbutil=new DBUtil();
-        String url = dbutil.vratiUrl();
-        String user = dbutil.vratiKorisnika();
-        String pass = dbutil.vratiSifru();
+    public void otvoriKonekciju() {
         try {
+            DBUtil dbutil = new DBUtil();
+            String url = dbutil.vratiUrl();
+            String user = dbutil.vratiKorisnika();
+            String pass = dbutil.vratiSifru();
+
             konekcija = DriverManager.getConnection(url, user, pass);
             konekcija.setAutoCommit(false);
         } catch (SQLException ex) {
+            Logger.getLogger(DBBroker.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(DBBroker.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -197,5 +200,22 @@ public class DBBroker {
         } catch (SQLException ex) {
             Logger.getLogger(DBBroker.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public ArrayList<Usluga> vratiListuUsluga(String filterText) {
+        ArrayList<Usluga> listaUsluga = new ArrayList<>();
+        String upit = "SELECT * FROM usluga join tipusluge using(ŠifraTipaUsluge) WHERE CONCAT(ŠifraUsluge,NazivUsluge,OpisUsluge,CenaUsluge,ŠifraTipaUsluge,NazivTipaUsluge) LIKE '%"+filterText+"%'";
+
+        try {
+            Statement s = konekcija.createStatement();
+            ResultSet rs = s.executeQuery(upit);
+            while (rs.next()) {
+                Usluga u = new Usluga(rs.getInt("ŠifraUsluge"), rs.getString("NazivUsluge"), rs.getString("OpisUsluge"), rs.getDouble("CenaUsluge"), new TipUsluge(rs.getInt("ŠifraTipaUsluge"), rs.getString("NazivTipaUsluge")));
+                listaUsluga.add(u);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBBroker.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaUsluga;
     }
 }
