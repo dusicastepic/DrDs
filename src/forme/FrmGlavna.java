@@ -8,7 +8,12 @@ package forme;
 import forme.kartonpacijenta.FrmKartonPacijenta;
 import forme.usluga.FrmUsluga;
 import java.awt.BorderLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import util.DBUtil;
 
 /**
  *
@@ -21,6 +26,7 @@ public class FrmGlavna extends javax.swing.JFrame {
      */
     public FrmGlavna() {
         initComponents();
+        srediPanele();
     }
 
     /**
@@ -38,8 +44,14 @@ public class FrmGlavna extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableKonfiguracija = new javax.swing.JTable();
+        JPanelBaza = new javax.swing.JPanel();
+        jLabelURL = new javax.swing.JLabel();
+        jLabelKorisničkoIme = new javax.swing.JLabel();
+        jLabelLozinka = new javax.swing.JLabel();
+        jTextFieldURL = new javax.swing.JTextField();
+        jTextFieldKorisničkoIme = new javax.swing.JTextField();
+        jTextFieldLozinka = new javax.swing.JTextField();
+        jButtonPrijaviSe = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuKartoniPacijenata = new javax.swing.JMenu();
         JMenuItemNoviKarton = new javax.swing.JMenuItem();
@@ -59,34 +71,78 @@ public class FrmGlavna extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTableKonfiguracija.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        jLabelURL.setText("URL");
+
+        jLabelKorisničkoIme.setText("Korisničko ime");
+
+        jLabelLozinka.setText("Lozinka");
+
+        jTextFieldKorisničkoIme.setText(" ");
+
+        jTextFieldLozinka.setText(" ");
+
+        jButtonPrijaviSe.setText("Prijavi se");
+        jButtonPrijaviSe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPrijaviSeActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTableKonfiguracija);
+        });
+
+        javax.swing.GroupLayout JPanelBazaLayout = new javax.swing.GroupLayout(JPanelBaza);
+        JPanelBaza.setLayout(JPanelBazaLayout);
+        JPanelBazaLayout.setHorizontalGroup(
+            JPanelBazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPanelBazaLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(JPanelBazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonPrijaviSe)
+                    .addGroup(JPanelBazaLayout.createSequentialGroup()
+                        .addGroup(JPanelBazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelURL)
+                            .addComponent(jLabelKorisničkoIme)
+                            .addComponent(jLabelLozinka))
+                        .addGap(42, 42, 42)
+                        .addGroup(JPanelBazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldURL)
+                            .addComponent(jTextFieldKorisničkoIme)
+                            .addComponent(jTextFieldLozinka, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        JPanelBazaLayout.setVerticalGroup(
+            JPanelBazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPanelBazaLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(JPanelBazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelURL)
+                    .addComponent(jTextFieldURL, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(JPanelBazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelKorisničkoIme)
+                    .addComponent(jTextFieldKorisničkoIme, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(JPanelBazaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelLozinka)
+                    .addComponent(jTextFieldLozinka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addComponent(jButtonPrijaviSe)
+                .addGap(29, 29, 29))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(308, Short.MAX_VALUE))
+                .addGap(178, 178, 178)
+                .addComponent(JPanelBaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(330, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(190, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addComponent(JPanelBaza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -210,8 +266,29 @@ public class FrmGlavna extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemPokreniActionPerformed
 
     private void jMenuItemBazaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBazaActionPerformed
-        // TODO add your handling code here:
+        JPanelBaza.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItemBazaActionPerformed
+
+    private void jButtonPrijaviSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrijaviSeActionPerformed
+        String url = jTextFieldURL.getText().trim();
+        String user = jTextFieldKorisničkoIme.getText().trim();
+        String pass = jTextFieldLozinka.getText().trim();
+        try {
+            DBUtil dbu = new DBUtil();
+            if (dbu.vratiUrl().equalsIgnoreCase(url) &&  dbu.vratiKorisnika().equalsIgnoreCase(user) && dbu.vratiSifru().equalsIgnoreCase(pass)) {
+                JPanelBaza.setVisible(false);
+                JOptionPane.showMessageDialog(this, "Prijava uspešna!", "Obaveštenje", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else    
+                JOptionPane.showMessageDialog(this, "Prijava neuspešna!", "Obaveštenje", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (IOException ex) {
+            Logger.getLogger(FrmGlavna.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_jButtonPrijaviSeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +329,11 @@ public class FrmGlavna extends javax.swing.JFrame {
     private javax.swing.JMenuItem JMenuItemNoviKarton;
     private javax.swing.JMenuItem JMenuItemOAutoru;
     private javax.swing.JMenuItem JMenuItemPrikazKartona;
+    private javax.swing.JPanel JPanelBaza;
+    private javax.swing.JButton jButtonPrijaviSe;
+    private javax.swing.JLabel jLabelKorisničkoIme;
+    private javax.swing.JLabel jLabelLozinka;
+    private javax.swing.JLabel jLabelURL;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -265,7 +347,12 @@ public class FrmGlavna extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuUsluge;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableKonfiguracija;
+    private javax.swing.JTextField jTextFieldKorisničkoIme;
+    private javax.swing.JTextField jTextFieldLozinka;
+    private javax.swing.JTextField jTextFieldURL;
     // End of variables declaration//GEN-END:variables
+
+    private void srediPanele() {
+        JPanelBaza.setVisible(false);
+    }
 }

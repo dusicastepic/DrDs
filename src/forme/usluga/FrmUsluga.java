@@ -367,7 +367,7 @@ public class FrmUsluga extends javax.swing.JFrame {
             return;
         }
         if (!proveriCifre()) {
-            JOptionPane.showMessageDialog(this, "Cena usluge može sadržati brojeve samo!", "Greška", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Cena usluge može sadržati samo brojeve, kao i . ukoliko je decimalan iznos!", "Greška", JOptionPane.ERROR_MESSAGE);
             // jTextFieldCenaUsluge.requestFocusInWindow();
             return;
         }
@@ -499,7 +499,7 @@ public class FrmUsluga extends javax.swing.JFrame {
             return;
         }
         if (!proveriCifre()) {
-            JOptionPane.showMessageDialog(this, "Cena usluge ne može imati slova!", "Greška", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Cena usluge može sadržati samo slova!", "Greška", JOptionPane.ERROR_MESSAGE);
 //            jTextFieldCenaUsluge.requestFocusInWindow();
             return;
         }
