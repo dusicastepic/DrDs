@@ -7,10 +7,12 @@ package forme.usluga;
 
 import domen.TipUsluge;
 import domen.Usluga;
+import java.awt.Color;
 import java.awt.Insets;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableColumn;
 import model.ModelTabeleUsluga;
 import poslovnalogika.Kontroler;
 
@@ -32,6 +34,7 @@ public class FrmUsluga extends javax.swing.JFrame {
         srediDugmad();
         srediTabeluUsluga();
         srediLabeleZaValidaciju();
+        
     }
 
     /**
@@ -44,6 +47,9 @@ public class FrmUsluga extends javax.swing.JFrame {
     private void initComponents() {
 
         jLayeredPane2 = new javax.swing.JLayeredPane();
+        jPanelTabelaUsluga = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableTabelaUsluga = new javax.swing.JTable();
         jPanelNovaUsluga = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -60,17 +66,45 @@ public class FrmUsluga extends javax.swing.JFrame {
         jButtonSacuvaj = new javax.swing.JButton();
         jLabelCenaUslugeValidacija = new javax.swing.JLabel();
         jLabelNazivUslugeValidacija = new javax.swing.JLabel();
-        jPanelTabelaUsluga = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTableTabelaUsluga = new javax.swing.JTable();
-        jTextFieldpretrazi = new javax.swing.JTextField();
-        jButtonPretrazi = new javax.swing.JButton();
         jButtondodaj = new javax.swing.JButton();
         jButtonObrisi = new javax.swing.JButton();
         jButtonPretraga = new javax.swing.JButton();
         jButtonIzmeni = new javax.swing.JButton();
+        jPanelSlučajKorišćenja = new javax.swing.JPanel();
+        jLabelSlučajKorišćenja = new javax.swing.JLabel();
+        jTextFieldpretrazi = new javax.swing.JTextField();
+        jButtonPretrazi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTableTabelaUsluga.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTableTabelaUsluga);
+
+        javax.swing.GroupLayout jPanelTabelaUslugaLayout = new javax.swing.GroupLayout(jPanelTabelaUsluga);
+        jPanelTabelaUsluga.setLayout(jPanelTabelaUslugaLayout);
+        jPanelTabelaUslugaLayout.setHorizontalGroup(
+            jPanelTabelaUslugaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTabelaUslugaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1063, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(770, Short.MAX_VALUE))
+        );
+        jPanelTabelaUslugaLayout.setVerticalGroup(
+            jPanelTabelaUslugaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTabelaUslugaLayout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 153, Short.MAX_VALUE))
+        );
 
         jPanelNovaUsluga.setBorder(javax.swing.BorderFactory.createTitledBorder("Nova usluga"));
         jPanelNovaUsluga.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -166,88 +200,29 @@ public class FrmUsluga extends javax.swing.JFrame {
         jLabelNazivUslugeValidacija.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/kensl.png"))); // NOI18N
         jPanelNovaUsluga.add(jLabelNazivUslugeValidacija, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, -1, -1));
 
-        jTableTabelaUsluga.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(jTableTabelaUsluga);
-
-        javax.swing.GroupLayout jPanelTabelaUslugaLayout = new javax.swing.GroupLayout(jPanelTabelaUsluga);
-        jPanelTabelaUsluga.setLayout(jPanelTabelaUslugaLayout);
-        jPanelTabelaUslugaLayout.setHorizontalGroup(
-            jPanelTabelaUslugaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTabelaUslugaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(544, Short.MAX_VALUE))
-        );
-        jPanelTabelaUslugaLayout.setVerticalGroup(
-            jPanelTabelaUslugaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTabelaUslugaLayout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 156, Short.MAX_VALUE))
-        );
-
-        jTextFieldpretrazi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldpretraziActionPerformed(evt);
-            }
-        });
-        jTextFieldpretrazi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextFieldpretraziKeyPressed(evt);
-            }
-        });
-
-        jButtonPretrazi.setText("Pretraži");
-        jButtonPretrazi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPretraziActionPerformed(evt);
-            }
-        });
-
-        jLayeredPane2.setLayer(jPanelNovaUsluga, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane2.setLayer(jPanelTabelaUsluga, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jTextFieldpretrazi, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(jButtonPretrazi, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(jPanelNovaUsluga, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
         jLayeredPane2Layout.setHorizontalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane2Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(jPanelNovaUsluga, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jPanelTabelaUsluga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(jTextFieldpretrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonPretrazi)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addContainerGap(161, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addComponent(jPanelNovaUsluga, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 18, Short.MAX_VALUE))
+            .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelTabelaUsluga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldpretrazi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonPretrazi))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanelNovaUsluga, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jButtondodaj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pluskebab.png"))); // NOI18N
@@ -280,25 +255,70 @@ public class FrmUsluga extends javax.swing.JFrame {
             }
         });
 
+        jPanelSlučajKorišćenja.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        javax.swing.GroupLayout jPanelSlučajKorišćenjaLayout = new javax.swing.GroupLayout(jPanelSlučajKorišćenja);
+        jPanelSlučajKorišćenja.setLayout(jPanelSlučajKorišćenjaLayout);
+        jPanelSlučajKorišćenjaLayout.setHorizontalGroup(
+            jPanelSlučajKorišćenjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSlučajKorišćenjaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelSlučajKorišćenja, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+        jPanelSlučajKorišćenjaLayout.setVerticalGroup(
+            jPanelSlučajKorišćenjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelSlučajKorišćenjaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelSlučajKorišćenja, javax.swing.GroupLayout.DEFAULT_SIZE, 9, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTextFieldpretrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldpretraziActionPerformed(evt);
+            }
+        });
+        jTextFieldpretrazi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldpretraziKeyPressed(evt);
+            }
+        });
+
+        jButtonPretrazi.setText("Pretraži");
+        jButtonPretrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPretraziActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jButtondodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jButtonPretraga)
+                .addGap(41, 41, 41)
+                .addComponent(jButtonIzmeni, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(jButtonObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelSlučajKorišćenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(437, 437, 437))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jButtondodaj, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jButtonPretraga)
-                        .addGap(41, 41, 41)
-                        .addComponent(jButtonIzmeni, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(jButtonObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1668, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(jTextFieldpretrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonPretrazi)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,12 +331,18 @@ public class FrmUsluga extends javax.swing.JFrame {
                             .addComponent(jButtondodaj)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonObrisi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonIzmeni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanelSlučajKorišćenja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButtonObrisi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonIzmeni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldpretrazi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonPretrazi))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         pack();
@@ -336,6 +362,8 @@ public class FrmUsluga extends javax.swing.JFrame {
         jTextFieldpretrazi.setVisible(false);
         jButtonPretrazi.setVisible(false);
         srediLabeleZaValidaciju();
+        jPanelSlučajKorišćenja.setVisible(true);
+        jLabelSlučajKorišćenja.setText("Dodavanje usluge");
     }//GEN-LAST:event_jButtondodajActionPerformed
 
     private void jComboBoxTipUslugaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipUslugaActionPerformed
@@ -427,10 +455,12 @@ public class FrmUsluga extends javax.swing.JFrame {
             return;
         }
         obrisiSveIzForme();
-
+        jPanelSlučajKorišćenja.setVisible(true);
+        jLabelSlučajKorišćenja.setText("Brisanje usluge");
     }//GEN-LAST:event_jButtonObrisiActionPerformed
 
     private void jButtonPretragaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPretragaActionPerformed
+        jTableTabelaUsluga.setAutoResizeMode(jTableTabelaUsluga.AUTO_RESIZE_ALL_COLUMNS);
         jTextFieldpretrazi.setText("");
         jPanelTabelaUsluga.setVisible(true);
         jPanelNovaUsluga.setVisible(false);
@@ -438,6 +468,8 @@ public class FrmUsluga extends javax.swing.JFrame {
         jButtonIzmeni.setVisible(true);
         jButtonPretrazi.setVisible(true);
         jTextFieldpretrazi.setVisible(true);
+        jPanelSlučajKorišćenja.setVisible(true);
+        jLabelSlučajKorišćenja.setText("Pretraživanje usluge");
     }//GEN-LAST:event_jButtonPretragaActionPerformed
 
     private void jButtonIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIzmeniActionPerformed
@@ -472,7 +504,10 @@ public class FrmUsluga extends javax.swing.JFrame {
         jTextFieldpretrazi.setVisible(false);
         jButtonPretrazi.setVisible(false);
         jPanelNovaUsluga.setVisible(true);
-
+        jPanelSlučajKorišćenja.setVisible(true);
+        jLabelSlučajKorišćenja.setText("Izmena usluge");
+        jLabelSlučajKorišćenja.setBackground(Color.green);
+//        jPanelSlučajKorišćenja.setBorder(BorderFactory.createLineBorder(Color.green));
 
     }//GEN-LAST:event_jButtonIzmeniActionPerformed
 
@@ -601,7 +636,7 @@ public class FrmUsluga extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNazivUslugeActionPerformed
 
     private void jButtonPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPretraziActionPerformed
-
+         jTableTabelaUsluga.setAutoResizeMode(jTableTabelaUsluga.AUTO_RESIZE_ALL_COLUMNS);
         String filterText = jTextFieldpretrazi.getText();
         ArrayList<Usluga> filterListaUsluga = Kontroler.getInstance().vratiListuUsluga(filterText);
         ModelTabeleUsluga mtu = new ModelTabeleUsluga(filterListaUsluga);
@@ -679,8 +714,10 @@ public class FrmUsluga extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelCenaUslugeValidacija;
     private javax.swing.JLabel jLabelNazivUslugeValidacija;
+    private javax.swing.JLabel jLabelSlučajKorišćenja;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JPanel jPanelNovaUsluga;
+    private javax.swing.JPanel jPanelSlučajKorišćenja;
     private javax.swing.JPanel jPanelTabelaUsluga;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -700,6 +737,7 @@ public class FrmUsluga extends javax.swing.JFrame {
         jButtonIzmeni.setVisible(false);
         jButtonPretrazi.setVisible(false);
         jTextFieldpretrazi.setVisible(false);
+        jPanelSlučajKorišćenja.setVisible(false);
 
     }
 
@@ -748,6 +786,18 @@ public class FrmUsluga extends javax.swing.JFrame {
     private void srediTabeluUsluga() {
         ModelTabeleUsluga mtu = new ModelTabeleUsluga();
         jTableTabelaUsluga.setModel(mtu);
+        jTableTabelaUsluga.setAutoResizeMode(jTableTabelaUsluga.AUTO_RESIZE_OFF);
+        TableColumn sifraUsluge=jTableTabelaUsluga.getColumnModel().getColumn(0);
+        sifraUsluge.setPreferredWidth(100);
+         TableColumn nazivUsluge=jTableTabelaUsluga.getColumnModel().getColumn(1);
+        nazivUsluge.setPreferredWidth(270);
+         TableColumn opisUsluge=jTableTabelaUsluga.getColumnModel().getColumn(2);
+        opisUsluge.setPreferredWidth(300);
+          TableColumn cenaUsluge=jTableTabelaUsluga.getColumnModel().getColumn(3);
+        cenaUsluge.setPreferredWidth(100);
+           TableColumn tipUsluge=jTableTabelaUsluga.getColumnModel().getColumn(4);
+        tipUsluge.setPreferredWidth(272);
+                
 
     }
 
