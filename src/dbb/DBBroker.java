@@ -204,7 +204,7 @@ public class DBBroker {
 
     public ArrayList<Usluga> vratiListuUsluga(String filterText) {
         ArrayList<Usluga> listaUsluga = new ArrayList<>();
-        String upit = "SELECT * FROM usluga join tipusluge using(ŠifraTipaUsluge) WHERE CONCAT(ŠifraUsluge,NazivUsluge,OpisUsluge,CenaUsluge,ŠifraTipaUsluge,NazivTipaUsluge) LIKE '%"+filterText+"%'";
+        String upit = "SELECT * FROM usluga join tipusluge using(ŠifraTipaUsluge) WHERE CONCAT(ŠifraUsluge,NazivUsluge,OpisUsluge,CenaUsluge,ŠifraTipaUsluge,NazivTipaUsluge) LIKE '%"+filterText+"%' order by ŠifraUsluge asc";
 
         try {
             Statement s = konekcija.createStatement();

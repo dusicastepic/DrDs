@@ -11,6 +11,7 @@ import java.awt.BorderLayout;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import util.DBUtil;
@@ -20,13 +21,14 @@ import util.DBUtil;
  * @author User
  */
 public class FrmGlavna extends javax.swing.JFrame {
-
+          DBUtil dbu;
     /**
      * Creates new form FrmGlavna
      */
     public FrmGlavna() {
         initComponents();
         srediPanele();
+      
     }
 
     /**
@@ -261,31 +263,36 @@ public class FrmGlavna extends javax.swing.JFrame {
     }//GEN-LAST:event_JMenuItemPrikazKartonaActionPerformed
 
     private void jMenuItemPokreniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPokreniActionPerformed
-        JFrame frmu = new FrmUsluga();
+        FrmUsluga frmu = new FrmUsluga();
         frmu.setVisible(true);
+        
     }//GEN-LAST:event_jMenuItemPokreniActionPerformed
 
     private void jMenuItemBazaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBazaActionPerformed
-        JPanelBaza.setVisible(true);
-        
-    }//GEN-LAST:event_jMenuItemBazaActionPerformed
 
-    private void jButtonPrijaviSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrijaviSeActionPerformed
-        String url = jTextFieldURL.getText().trim();
-        String user = jTextFieldKorisničkoIme.getText().trim();
-        String pass = jTextFieldLozinka.getText().trim();
         try {
-            DBUtil dbu = new DBUtil();
-            if (dbu.vratiUrl().equalsIgnoreCase(url) &&  dbu.vratiKorisnika().equalsIgnoreCase(user) && dbu.vratiSifru().equalsIgnoreCase(pass)) {
-                JPanelBaza.setVisible(false);
-                JOptionPane.showMessageDialog(this, "Prijava uspešna!", "Obaveštenje", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else    
-                JOptionPane.showMessageDialog(this, "Prijava neuspešna!", "Obaveštenje", JOptionPane.INFORMATION_MESSAGE);
-
+            dbu = new DBUtil();
+            jTextFieldURL.setText(dbu.vratiUrl());
+            jTextFieldKorisničkoIme.setText(dbu.vratiKorisnika());
+            jTextFieldLozinka.setText(dbu.vratiSifru());
         } catch (IOException ex) {
             Logger.getLogger(FrmGlavna.class.getName()).log(Level.SEVERE, null, ex);
         }
+        JPanelBaza.setVisible(true);
+    }//GEN-LAST:event_jMenuItemBazaActionPerformed
+
+    private void jButtonPrijaviSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrijaviSeActionPerformed
+
+    
+
+            if (dbu.vratiUrl().equalsIgnoreCase(jTextFieldURL.getText()) && dbu.vratiKorisnika().equalsIgnoreCase(jTextFieldKorisničkoIme.getText()) && dbu.vratiSifru().equalsIgnoreCase(jTextFieldLozinka.getText())) {
+                JPanelBaza.setVisible(false);
+                JOptionPane.showMessageDialog(this, "Prijava uspešna!", "Obaveštenje", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Prijava neuspešna!", "Obaveštenje", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        
 
 
     }//GEN-LAST:event_jButtonPrijaviSeActionPerformed

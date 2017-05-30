@@ -20,10 +20,9 @@ import poslovnalogika.Kontroler;
  *
  * @author User
  */
-public class FrmUsluga extends javax.swing.JFrame {
+public class FrmUsluga extends javax.swing.JDialog {
 
     ImageIcon pic;
-
     /**
      * Creates new form FrmUsluga
      */
@@ -75,7 +74,8 @@ public class FrmUsluga extends javax.swing.JFrame {
         jTextFieldpretrazi = new javax.swing.JTextField();
         jButtonPretrazi = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setModal(true);
 
         jTableTabelaUsluga.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -636,7 +636,7 @@ public class FrmUsluga extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldNazivUslugeActionPerformed
 
     private void jButtonPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPretraziActionPerformed
-         jTableTabelaUsluga.setAutoResizeMode(jTableTabelaUsluga.AUTO_RESIZE_ALL_COLUMNS);
+        //jTableTabelaUsluga.setAutoResizeMode(jTableTabelaUsluga.AUTO_RESIZE_ALL_COLUMNS);
         String filterText = jTextFieldpretrazi.getText();
         ArrayList<Usluga> filterListaUsluga = Kontroler.getInstance().vratiListuUsluga(filterText);
         ModelTabeleUsluga mtu = new ModelTabeleUsluga(filterListaUsluga);
